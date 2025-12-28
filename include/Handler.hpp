@@ -33,3 +33,5 @@ public:
 };
 
 } // namespace log
+
+#include "Template.hpp"
