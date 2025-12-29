@@ -1,16 +1,7 @@
+#pragma once
 #include "Handler.hpp"
 
 namespace log {
-
-const char* log::toString(LOG_LEVEL level) {
-    switch (level) {
-        case LOG_LEVEL::INFO: return "INFO";
-        case LOG_LEVEL::WARN: return "WARN";
-        case LOG_LEVEL::ERROR: return "ERROR";
-        case LOG_LEVEL::DEBUG: return "DEBUG";
-        default: return "UNKNOWN"; 
-    }
-}
 
 void logarithm::logInt(int val) {
     if (val < 0) val = -val;
@@ -51,14 +42,6 @@ void logarithm::logCstr(const char* str) {
 }
 
 // templated functions moved to Template.hpp
-
-void logarithm::formatImpl(const char* fmt) {
-    while (*fmt) {
-        std::fputc(*fmt, stdout);
-        ++fmt;
-    }   
-}
-
 // templated functions moved to Template.hpp
 // see Api.cpp for user usage
 
