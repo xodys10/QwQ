@@ -8,22 +8,13 @@ void logarithm::formatImpl(const char* fmt, T val, Args... args) {
     while (*fmt) {
         if (fmt[0] == '{' && fmt[1] == ':' && fmt[3] == '}') {
             char spec = fmt[2];
-            switch (spec) {
-                case 'd': logInt(static_cast<int>(val)); break;
-                case 'x': logHex(static_cast<uintptr_t>(val)); break;
-                case 'p': logHex(reinterpret_cast<uintptr_t>(val)); break;
-                case 's': logCstr(static_cast<const char*>(val)); break;
-                default: std::fputc('?', stdout); break;
-            }
+            detail::dispatchLog(spec, val);
 
             fmt += 4;
-            if constexpr(sizeof...(args) > 0)
-                formatImpl(fmt, args...);
+            formatImpl(fmt, args...);
             return;
-        } else {
-            std::fputc(*fmt, stdout);
         }
-        ++fmt;
+        std::fputc(*fmt++, stdout);
     }
 }
 
